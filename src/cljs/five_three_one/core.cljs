@@ -9,9 +9,18 @@
 ;; -------------------------
 ;; Views
 
-(defn home-page []
-  [:div [:h2 "Welcome to five-three-one"]
-   [:div [:a {:href "#/about"} "go to about page"]]])
+(defn heading
+  []
+  "this is a heading.")
+
+(def home-page
+  (let [state (atom 0)]
+    (fn [] [:div [:h2 (heading)]
+            [:div [:a {:href "#/about"} "go to about page"]]
+            [:button {:on-click #(do (swap! state inc)
+                                     (println state))}
+             "Click here to increment the number!"]
+            [:div (str @state)]])))
 
 (defn about-page []
   [:div [:h2 "About five-three-one"]
