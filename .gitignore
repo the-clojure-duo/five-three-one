@@ -11,3 +11,6 @@ pom.xml.asc
 /out
 /.repl
 *.log
+profiles.clj
+*~
+.idea/*

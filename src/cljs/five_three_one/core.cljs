@@ -6,6 +6,9 @@
               [goog.history.EventType :as EventType])
     (:import goog.History))
 
+(defn signin-handler []
+  (.open js/window "/google_login" "Sign In" "width=800, height=600"))
+
 ;; -------------------------
 ;; Views
 
@@ -14,6 +17,20 @@
    [:h2 "Welcome to five-three-one"]
    [:div
     [:a {:href "#/about"} "go to about page"]]])
+
+(defn heading
+  []
+  "this is a heading.")
+
+(def home-page
+  (let [state (atom 0)]
+    (fn [] [:div [:h2 (heading)]
+            [:div [:a {:href "#/about"} "go to about page"]]
+            [:button {:on-click #(do (swap! state inc)
+                                     (println state))}
+             "Click here to increment the number!"]
+            [:div (str @state)]
+            [:div {:on-click signin-handler} "SIGN IN"]])))
 
 (defn about-page []
   [:div [:h2 "About five-three-one"]

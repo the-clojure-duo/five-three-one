@@ -6,7 +6,9 @@
             [hiccup.page :refer [include-js include-css]]
             [prone.middleware :refer [wrap-exceptions]]
             [ring.middleware.reload :refer [wrap-reload]]
-            [environ.core :refer [env]]))
+            [environ.core :refer [env]]
+            [five-three-one.controllers.google-auth :as google-auth]
+            [five-three-one.middleware.oauth2 :as oauth2]))
 
 (def home-page
   (html
@@ -26,9 +28,12 @@
 
 (defroutes routes
   (GET "/" [] home-page)
+  google-auth/signin-route
   (resources "/")
   (not-found "Not Found"))
 
 (def app
-  (let [handler (wrap-defaults #'routes site-defaults)]
+  (let [handler (-> #'routes
+                    (oauth2/wrap-oauth2 google-auth/oauth-config)
+                    (wrap-defaults site-defaults))]
     (if (env :dev) (-> handler wrap-exceptions wrap-reload) handler)))
