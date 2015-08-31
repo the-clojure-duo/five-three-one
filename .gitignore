@@ -13,5 +13,5 @@ pom.xml.asc
 *.log
 profiles.clj
 *~
-.idea/*
+/.idea
 *.iml
