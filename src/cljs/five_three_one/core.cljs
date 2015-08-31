@@ -12,12 +12,6 @@
 ;; -------------------------
 ;; Views
 
-(defn home-page []
-  [:div
-   [:h2 "Welcome to five-three-one"]
-   [:div
-    [:a {:href "#/about"} "go to about page"]]])
-
 (defn heading
   []
   "this is a heading.")
