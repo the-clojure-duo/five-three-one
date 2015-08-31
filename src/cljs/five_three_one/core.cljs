@@ -10,8 +10,10 @@
 ;; Views
 
 (defn home-page []
-  [:div [:h2 "Welcome to five-three-one"]
-   [:div [:a {:href "#/about"} "go to about page"]]])
+  [:div
+   [:h2 "Welcome to five-three-one"]
+   [:div
+    [:a {:href "#/about"} "go to about page"]]])
 
 (defn about-page []
   [:div [:h2 "About five-three-one"]
