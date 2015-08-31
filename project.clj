@@ -18,8 +18,13 @@
                  [compojure "1.4.0"]
                  [hiccup "1.0.5"]
                  [environ "1.0.0"]
+                 [clj-http "1.1.2"]
+                 [yesql "0.4.2"]
+                 [org.clojure/data.json "0.2.6"]
                  [org.clojure/clojurescript "0.0-3308" :scope "provided"]
-                 [secretary "1.2.3"]]
+                 [secretary "1.2.3"]
+                 [org.postgresql/postgresql "9.4-1202-jdbc42"]
+                 [migratus "0.8.4"]]
 
   :plugins [[lein-environ "1.0.0"]
             [lein-asset-minifier "0.2.2"]]
@@ -48,36 +53,37 @@
                                         :optimizations :none
                                         :pretty-print  true}}}}
 
-  :profiles {:dev {:repl-options {:init-ns five-three-one.repl
-                                  :nrepl-middleware []}
+  :profiles {:dev [:project/dev :profiles/dev]
+             :project/dev {:repl-options {:init-ns five-three-one.repl
+                                          :nrepl-middleware []}
 
-                   :dependencies [[ring/ring-mock "0.2.0"]
-                                  [ring/ring-devel "1.4.0"]
-                                  [lein-figwheel "0.3.7"]
-                                  [org.clojure/tools.nrepl "0.2.10"]
-                                  [pjstadig/humane-test-output "0.7.0"]]
+                           :dependencies [[ring/ring-mock "0.2.0"]
+                                          [ring/ring-devel "1.4.0"]
+                                          [lein-figwheel "0.3.7"]
+                                          [org.clojure/tools.nrepl "0.2.10"]
+                                          [pjstadig/humane-test-output "0.7.0"]]
 
-                   :source-paths ["env/dev/clj"]
-                   :plugins [[lein-figwheel "0.3.7"]
-                             [lein-cljsbuild "1.0.6"]]
+                           :source-paths ["env/dev/clj"]
+                           :plugins [[lein-figwheel "0.3.7"]
+                                     [lein-cljsbuild "1.0.6"]]
 
-                   :injections [(require 'pjstadig.humane-test-output)
-                                (pjstadig.humane-test-output/activate!)]
+                           :injections [(require 'pjstadig.humane-test-output)
+                                        (pjstadig.humane-test-output/activate!)]
 
-                   :figwheel {:http-server-root "public"
-                              :server-port 3449
-                              :nrepl-port 7002
-                              :css-dirs ["resources/public/css"]
-                              :ring-handler five-three-one.handler/app}
+                           :figwheel {:http-server-root "public"
+                                      :server-port 3449
+                                      :nrepl-port 7002
+                                      :css-dirs ["resources/public/css"]
+                                      :ring-handler five-three-one.handler/app}
 
-                   :env {:dev true}
+                           :env {:dev true}
 
-                   :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]
-                                              :compiler {:main "five-three-one.dev"
-                                                         :source-map true}}
-}
-}}
-
+                           :cljsbuild {:builds {:app {:source-paths ["env/dev/cljs"]
+                                                      :compiler {:main "five-three-one.dev"
+                                                                 :source-map true}}
+                                                }
+                                       }}
+             :profiles/dev {}
              :uberjar {:hooks [leiningen.cljsbuild minify-assets.plugin/hooks]
                        :env {:production true}
                        :aot :all
