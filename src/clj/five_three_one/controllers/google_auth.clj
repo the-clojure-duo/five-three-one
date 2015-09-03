@@ -1,8 +1,8 @@
 (ns five-three-one.controllers.google-auth
   (:require [compojure.core :refer [defroutes GET]]
             [ring.middleware.params :refer [wrap-params]]
-            [ring.util.response :refer [redirect]]
-            [environ.core :refer [env]]
+            [ring.util.response :refer [redirect response content-type]]
+            [environ.core :refer [env]] 
             [clj-http.client :as client]
             [clojure.pprint :refer [pprint]]
             ring.util.codec
@@ -54,7 +54,7 @@
                                     :last-name family_name
                                     :email email}))
         session (assoc-in (:session request) [:user] (:uuid user))
-        response (assoc (redirect "/") :session session)]
+        response (assoc (content-type (response "") "text/html") :session session)]
     ;; add user data to session
     (println "from auth")
     (pprint response)
