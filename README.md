@@ -6,9 +6,11 @@ An app for tracking progress with the [5/3/1 strength program](https://www.t-nat
 - [Leiningen](http://leiningen.org/)
 - Node, for compiling css
 - [EditorConfig](http://editorconfig.org)
-	- IntelliJ - EditorConfig is already built-in
-	- [Emacs plugin](https://github.com/editorconfig/editorconfig-emacs#readme)
-	- [Sublime Text plugin](https://github.com/sindresorhus/editorconfig-sublime#readme)
+	1. Install the [core](https://github.com/editorconfig/editorconfig-core-c) by running `brew install editorconfig`
+	2. Download a plugin
+		- IntelliJ - No plugin necessary
+		- [Emacs plugin](https://github.com/editorconfig/editorconfig-emacs#readme)
+		- [Sublime Text plugin](https://github.com/sindresorhus/editorconfig-sublime#readme)
 
 ## To run:
 From the project directory, simply run `./scripts/run.sh`
