@@ -15,3 +15,5 @@ profiles.clj
 *~
 /.idea
 *.iml
+/resources/public/css
+/node_modules
