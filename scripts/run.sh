@@ -1,8 +1,5 @@
 #!/bin/bash
 set -xe
-if [ ! `command -v gulp` ]; then
-    npm i -g gulp;
-fi;
 npm install;
-gulp &
+node node_modules/gulp/bin/gulp.js &
 lein do run migrate, figwheel
