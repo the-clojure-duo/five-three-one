@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
-    cssSourceGlob = './postcss/**/*.css';
+    cssSourceGlob = './postcss/main.css',
+    fs = require('fs');
 
 gulp.task('default', function() {
     gulp.start('postcss');
@@ -11,14 +12,17 @@ gulp.task('postcss', function() {
         postcss = require('gulp-postcss'),
         nested = require ('postcss-nested'),
         simpleVars = require('postcss-simple-vars'),
+        nano = require('gulp-cssnano'),
+        atImport = require('postcss-import')(),
         autoprefixer = require('autoprefixer');    
     return gulp.src(cssSourceGlob)
         .pipe(sourcemaps.init())
-        .pipe(postcss([nested, simpleVars, autoprefixer]))
+        .pipe(postcss([atImport, nested, simpleVars, autoprefixer]))
+        .pipe(nano())
         .pipe(sourcemaps.write('.'))
         .pipe(gulp.dest('./resources/public/css/'));
 });
 
 gulp.task('watch', function() {
     gulp.watch(cssSourceGlob, ['postcss']);
-})
+});
