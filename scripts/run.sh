@@ -5,4 +5,4 @@ if [ ! `command -v gulp` ]; then
 fi;
 npm install;
 gulp &
-lein figwheel
+lein do run migrate, figwheel
