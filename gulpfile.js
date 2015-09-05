@@ -24,5 +24,5 @@ gulp.task('postcss', function() {
 });
 
 gulp.task('watch', function() {
-    gulp.watch(cssSourceGlob, ['postcss']);
+    gulp.watch('./postcss/**/*.css', ['postcss']);
 });
