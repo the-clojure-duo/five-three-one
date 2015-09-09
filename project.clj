@@ -9,6 +9,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [ring-server "0.4.0"]
                  [cljsjs/react "0.13.3-1"]
+                 [cljsjs/web-animations "2.1.2-0"]
                  [reagent "0.5.0"]
                  [reagent-forms "0.5.5"]
                  [reagent-utils "0.1.5"]

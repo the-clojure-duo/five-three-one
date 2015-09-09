@@ -4,6 +4,7 @@
               [secretary.core :as secretary :include-macros true]
               [goog.events :as events]
               [goog.history.EventType :as EventType])
+            [cljsjs.web-animations :as animation]
     (:import goog.History))
 
 (defn signin-handler []
