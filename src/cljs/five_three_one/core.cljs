@@ -1,10 +1,17 @@
 (ns five-three-one.core
-    (:require [reagent.core :as reagent :refer [atom]]
-              [reagent.session :as session]
-              [secretary.core :as secretary :include-macros true]
-              [goog.events :as events]
-              [goog.history.EventType :as EventType])
+  (:require-macros [reagent.ratom :refer [reaction]])
+  (:require [reagent.core :as reagent :refer [atom]]
+            [reagent.session :as session]
             [cljsjs.web-animations :as animation]
+            [secretary.core :as secretary :include-macros true]
+            [goog.events :as events]
+            [goog.history.EventType :as EventType]
+            [re-frame.core :refer [register-handler
+                                   path
+                                   register-sub
+                                   dispatch
+                                   dispatch-sync
+                                   subscribe]])
     (:import goog.History))
 
 (defn signin-handler []
