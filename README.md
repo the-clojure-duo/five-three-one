@@ -13,4 +13,4 @@ An app for tracking progress with the [5/3/1 strength program](https://www.t-nat
 		- [Sublime Text plugin](https://github.com/sindresorhus/editorconfig-sublime#readme)
 
 ## To run:
-From the project directory, simply run `./scripts/run.sh`
+From the project directory, simply run `./run.sh`
