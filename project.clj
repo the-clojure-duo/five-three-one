@@ -9,6 +9,7 @@
   :dependencies [[org.clojure/clojure "1.7.0"]
                  [ring-server "0.4.0"]
                  [cljsjs/react "0.13.3-1"]
+                 [cljsjs/web-animations "2.1.2-0"]
                  [reagent "0.5.0"]
                  [reagent-forms "0.5.5"]
                  [reagent-utils "0.1.5"]
@@ -24,7 +25,8 @@
                  [org.clojure/clojurescript "0.0-3308" :scope "provided"]
                  [secretary "1.2.3"]
                  [org.postgresql/postgresql "9.4-1202-jdbc42"]
-                 [migratus "0.8.4"]]
+                 [migratus "0.8.4"]
+                 [re-frame "0.4.1"]]
 
   :plugins [[lein-environ "1.0.0"]
             [lein-asset-minifier "0.2.2"]]
