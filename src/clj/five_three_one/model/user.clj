@@ -3,7 +3,9 @@
   (:require [five-three-one.model.queries :as queries]))
 
 (defn get-user-by-email [email]
-  (first (queries/get-user-by-email queries/spec email)))
+  (update-in (first (queries/get-user-by-email queries/spec email))
+             [:uuid]
+             str))
 
 (defn create-user! [{:keys [first-name last-name email]}]
   "creates new user and returns the created user"
