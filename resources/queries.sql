@@ -18,4 +18,10 @@ WHERE user_id=:user_id AND exercise=:exercise ORDER BY date_entered DESC LIMIT 1
 -- name: add-max!
 -- Add a max to the maxes table
 INSERT INTO maxes (uuid, user_id, exercise, weight)
-VALUES (:uuid, :user_id, :exercise, :weight)
+VALUES (:uuid, :user_id, :exercise, :weight);
+
+-- name: get-max-by-date
+-- Get training max that was in effect at a certain date
+SELECT *
+FROM maxes
+WHERE user_id=:user_id AND exercise=:exercise AND date_entered <= :timestamp ORDER BY date_entered DESC LIMIT 1;
