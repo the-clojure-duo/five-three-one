@@ -7,7 +7,8 @@
             [clojure.pprint :refer [pprint]]
             ring.util.codec
             [clojure.data.json :as json]
-            [five-three-one.model.user :as model]))
+            [five-three-one.model.user :as model]
+            [hiccup.page :as page]))
 
 (def CLIENT_ID (:client-id env))
 
@@ -44,6 +45,11 @@
 (defroutes routes
   (GET "/google_login" [] (redirect red)))
 
+(def close-page
+  (page/html5
+   [:body
+    [:script "window.close();"]]))
+
 (defn success-handler [{{access-token :access-token} :oauth2 :as request}]
   (let [{:strs [given_name family_name email]} (get-user-data access-token)
         ;; get user from db using email,
@@ -54,7 +60,10 @@
                                     :last-name family_name
                                     :email email}))
         session (assoc-in (:session request) [:user] (:uuid user))
-        response (assoc (content-type (response "") "text/html") :session session)]
+        response (-> close-page
+                     response
+                     (content-type "text/html")
+                     (assoc :session session))]
     ;; add user data to session
     (println "from auth")
     (pprint response)
