@@ -4,7 +4,8 @@
             [five-three-one.routes :as routes]
             [five-three-one.db :as db]
             five-three-one.subs
-            five-three-one.handlers))
+            five-three-one.handlers
+            five-three-one.utils.ajax))
 
 ;; -------------------------
 ;; Initialize app
