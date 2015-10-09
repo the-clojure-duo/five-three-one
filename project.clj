@@ -22,7 +22,7 @@
                  [clj-http "1.1.2"]
                  [yesql "0.4.2"]
                  [org.clojure/data.json "0.2.6"]
-                 [org.clojure/clojurescript "0.0-3308" :scope "provided"]
+                 [org.clojure/clojurescript "1.7.48"]
                  [secretary "1.2.3"]
                  [org.postgresql/postgresql "9.4-1202-jdbc42"]
                  [migratus "0.8.4"]
@@ -67,8 +67,8 @@
                                           [pjstadig/humane-test-output "0.7.0"]]
 
                            :source-paths ["env/dev/clj"]
-                           :plugins [[lein-figwheel "0.3.7"]
-                                     [lein-cljsbuild "1.0.6"]]
+                           :plugins [[lein-figwheel "0.4.0"]
+                                     [lein-cljsbuild "1.1.0"]]
 
                            :injections [(require 'pjstadig.humane-test-output)
                                         (pjstadig.humane-test-output/activate!)]
