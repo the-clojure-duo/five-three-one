@@ -1,4 +1,4 @@
-(ns five-three-one.utils.ajax.cljs
+(ns five-three-one.utils.ajax
   (:require-macros [cljs.core.async.macros :refer [go]])
   (:require [cljs.core.async :refer [put! chan <!]]
             [goog.events :as events]
