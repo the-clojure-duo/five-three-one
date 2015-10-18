@@ -8,7 +8,8 @@
             [ring.middleware.reload :refer [wrap-reload]]
             [environ.core :refer [env]]
             [five-three-one.controllers.google-auth :as google-auth]
-            [five-three-one.middleware.oauth2 :as oauth2]))
+            [five-three-one.middleware.oauth2 :as oauth2]
+            [ring.middleware.transit :refer [wrap-transit-response wrap-transit-body]]))
 
 (def home-page
   (html
@@ -35,5 +36,7 @@
 (def app
   (let [handler (-> #'routes
                     (oauth2/wrap-oauth2 google-auth/oauth-config)
-                    (wrap-defaults site-defaults))]
+                    (wrap-defaults site-defaults)
+                    (wrap-transit-body)
+                    (wrap-transit-response))]
     (if (env :dev) (-> handler wrap-exceptions wrap-reload) handler)))
