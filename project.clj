@@ -29,7 +29,9 @@
                  [re-frame "0.4.1"]
                  [clj-time "0.11.0"]
                  [com.cognitect/transit-cljs "0.8.225"]
-                 [ring-transit "0.1.4"]]
+                 [ring-transit "0.1.4"]
+                 [camel-snake-kebab "0.3.2"]
+                 [com.cognitect/transit-clj "0.8.285"]]
 
   :plugins [[lein-environ "1.0.0"]
             [lein-asset-minifier "0.2.2"]]
