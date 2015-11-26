@@ -9,9 +9,6 @@
   []
   "this is a heading")
 
-(defn signin-handler []
-  (.open js/window "/google_login" "Sign In" "width=800, height=600"))
-
 (defn page []
   (let [count (subscribe [:home-count])]
     (fn []
@@ -20,4 +17,4 @@
        [:button {:on-click #(dispatch [:home-count-inc])}
         "Click here to increment the number!"]
        [:div (str @count)]
-       [:div {:on-click signin-handler} "SIGN IN"]])))
+       [:a {:href "/google_login"} "SIGN IN"]])))

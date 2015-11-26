@@ -4,6 +4,9 @@
             [five-three-one.util.uuid :as uuid]
             [five-three-one.util.kebab :refer [kebabify-keys]]))
 
+(defn stringify-uuid [{uuid :uuid :as m}]
+  (assoc m :uuid (.toString uuid)))
+
 (defn get-user-by-email [email]
   (when-let [user-map (first (queries/get-user-by-email queries/spec email))]
     (kebabify-keys user-map)))

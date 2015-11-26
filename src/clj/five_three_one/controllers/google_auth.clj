@@ -8,7 +8,9 @@
             ring.util.codec
             [clojure.data.json :as json]
             [five-three-one.model.user :as model]
-            [hiccup.page :as page]))
+            [hiccup.page :as page]
+            [five-three-one.methods :as methods]
+            [ring.middleware.transit :refer [wrap-transit-response]]))
 
 (def CLIENT_ID (:client-id env))
 
@@ -45,12 +47,9 @@
 (defroutes routes
   (GET "/google_login" [] (redirect red)))
 
-(def close-page
-  (page/html5
-   [:body
-    [:script "window.close();"]]))
-
-(defn success-handler [{{access-token :access-token} :oauth2 :as request}]
+(defn success-handler [{{access-token :access-token} :oauth2
+                        session :session
+                        :as request}]
   (let [{:strs [given_name family_name email]} (get-user-data access-token)
         ;; get user from db using email,
         ;; create new one if doesn't exist
@@ -59,14 +58,9 @@
                (model/create-user! {:first-name given_name
                                     :last-name family_name
                                     :email email}))
-        session (assoc-in (:session request) [:user] (:uuid user))
-        response (-> close-page
-                     response
-                     (content-type "text/html")
-                     (assoc :session session))]
-    ;; add user data to session
-    (println "from auth")
-    (pprint response)
+        new-session (assoc session :user (:uuid user))
+        response (-> (redirect "/")
+                     (assoc :session new-session))]
     response))
 
 (def oauth-config {:client-id (:client-id env)
