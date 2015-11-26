@@ -4,6 +4,12 @@ SELECT *
 FROM users
 WHERE email=:email;
 
+-- name: get-user-by-uuid
+-- Get a user from the users table with a given UUID
+SELECT *
+FROM users
+WHERE uuid=:uuid;
+
 -- name: create-user!
 -- Add a user to the users table
 INSERT INTO users (uuid, first_name, last_name, email)

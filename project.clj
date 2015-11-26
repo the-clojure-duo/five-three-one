@@ -28,7 +28,8 @@
                  [migratus "0.8.4"]
                  [re-frame "0.4.1"]
                  [clj-time "0.11.0"]
-                 [com.cognitect/transit-cljs "0.8.225"]]
+                 [com.cognitect/transit-cljs "0.8.225"]
+                 [ring-transit "0.1.4"]]
 
   :plugins [[lein-environ "1.0.0"]
             [lein-asset-minifier "0.2.2"]]
