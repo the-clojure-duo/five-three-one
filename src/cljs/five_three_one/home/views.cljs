@@ -17,4 +17,4 @@
        [:button {:on-click #(dispatch [:home-count-inc])}
         "Click here to increment the number!"]
        [:div (str @count)]
-       [:a {:href "/google_login"} "SIGN IN"]])))
+       [:a {:href "/signout"} "SIGN OUT"]])))

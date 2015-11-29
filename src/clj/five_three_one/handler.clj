@@ -11,9 +11,10 @@
             [five-three-one.middleware.oauth2 :as oauth2]
             [ring.middleware.transit :refer [wrap-transit-response wrap-transit-body]]
             [five-three-one.methods :as methods]
-            [ring.util.response :refer [response]]
+            [ring.util.response :refer [response redirect content-type]]
             [five-three-one.model.user :as user]
-            [five-three-one.util :refer [embed-json-in-dom]]))
+            [five-three-one.util :refer [embed-json-in-dom]]
+            [five-three-one.controllers.sign-out :as sign-out]))
 
 (defn home-page [{{user-id :user} :session}]
   (html
@@ -42,10 +43,30 @@
        " in order to start the compiler"]]
      (include-js "js/app.js")]]))
 
+(def welcome-page
+  (html
+   [:html
+    [:head
+     [:meta {:charset "utf-8"}]
+     [:meta {:name "viewport"
+             :content "width=device-width, initial-scale=1"}]
+     (include-css "css/main.css")]
+    [:body
+     [:a {:href "/google_login"} "Sign in!"]]]))
+
+(defn home-handler [{{user-id :user} :session :as request}]
+  (if user-id
+    (-> (home-page request)
+        (response)
+        (content-type "text/html"))
+    (redirect "/welcome")))
+
 (defroutes routes
-  (GET "/" request home-page)
+  (GET "/" request (home-handler request))
+  (GET "/welcome" request welcome-page)
   google-auth/signin-route
   methods/route
+  sign-out/route
   (resources "/")
   (not-found "Not Found"))
 
