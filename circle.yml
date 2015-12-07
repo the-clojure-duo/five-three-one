@@ -2,13 +2,17 @@ machine:
   services:
     - docker
 
+dependencies:
+  override:
+    - echo "skip deps"
+
 test:
   pre:
     - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD -e $DOCKER_EMAIL
   override:
     - docker build -t projectfrank/531 .
 
-deploy:
+deployment:
   to-docker-hub:
     branch: master
     commands:
