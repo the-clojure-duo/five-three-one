@@ -20,12 +20,12 @@
                  [hiccup "1.0.5"]
                  [environ "1.0.0"]
                  [clj-http "1.1.2"]
-                 [yesql "0.4.2"]
+                 [yesql "0.5.1"]
                  [org.clojure/data.json "0.2.6"]
                  [org.clojure/clojurescript "1.7.48"]
                  [secretary "1.2.3"]
                  [org.postgresql/postgresql "9.4-1202-jdbc42"]
-                 [migratus "0.8.4"]
+                 [migratus "0.8.8"]
                  [re-frame "0.4.1"]
                  [clj-time "0.11.0"]
                  [com.cognitect/transit-cljs "0.8.225"]
@@ -51,7 +51,7 @@
 
   :minify-assets
   {:assets
-    {"resources/public/css/site.min.css" "resources/public/css/site.css"}}
+    {"resources/public/css/main.min.css" "resources/public/css/main.css"}}
 
   :cljsbuild {:builds {:app {:source-paths ["src/cljs"]
                              :compiler {:output-to     "resources/public/js/app.js"

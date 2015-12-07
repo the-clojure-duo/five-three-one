@@ -5,8 +5,7 @@
 (def config {:store                :database
              :migration-dir        "migrations/"
              :migration-table-name "migrations"
-             :db {:classname   "org.postgresql.postgresql"
-                  :connection-uri (str "jdbc:" queries/spec)}})
+             :db queries/spec})
 
 (defn migrate []
   (migratus/migrate config))

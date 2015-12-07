@@ -28,7 +28,7 @@
        (embed-json-in-dom "userData"
                           (-> user-id
                               (user/get-user-by-uuid)
-                              (user/stringify-uuid))))]
+                              (dissoc :uuid))))]
     [:body
      (when user-id
        (let [user (user/get-user-by-uuid user-id)
