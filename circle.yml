@@ -1,0 +1,15 @@
+machine:
+  services:
+    - docker
+
+test:
+  pre:
+    - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD -e $DOCKER_EMAIL
+  override:
+    - docker build -t projectfrank/531 .
+
+deploy:
+  to-docker-hub:
+    branch: master
+    commands:
+      - docker push projectfrank/531
