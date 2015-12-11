@@ -23,6 +23,19 @@ gulp.task('postcss', function() {
         .pipe(gulp.dest('./resources/public/css/'));
 });
 
+gulp.task('build', function() {
+  var postcss = require('gulp-postcss'),
+      nested = require ('postcss-nested'),
+      simpleVars = require('postcss-simple-vars'),
+      nano = require('gulp-cssnano'),
+      atImport = require('postcss-import')(),
+      autoprefixer = require('autoprefixer');    
+  return gulp.src(cssSourceGlob)
+    .pipe(postcss([atImport, nested, simpleVars, autoprefixer]))
+    .pipe(nano())
+    .pipe(gulp.dest('./resources/public/css/'));
+});
+
 gulp.task('watch', function() {
     gulp.watch('./postcss/**/*.css', ['postcss']);
 });

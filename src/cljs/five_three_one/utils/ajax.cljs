@@ -8,11 +8,11 @@
 
 (defn read-transit [s]
   (let [reader (t/reader :json)]
-    t/read reader s))
+    (t/read reader s)))
 
 (defn write-transit [x]
   (let [writer (t/writer :json)]
-    t/write writer x))
+    (t/write writer x)))
 
 (defn do-ajax [url & [method content]]
   (let [xhr (XhrIo.)
@@ -20,7 +20,7 @@
         method (if (= method :post)
                  "POST"
                  "GET")
-        transit-string (when (= method :post)
+        transit-string (when (= method "POST")
                          (write-transit content))
         handler #(let [result (-> %
                                   .-target
@@ -28,5 +28,7 @@
                                   read-transit)]
                    (put! out result))]
     (events/listen xhr EventType.SUCCESS handler)
-    (.send xhr url nil method transit-string)
+    (.send xhr url method transit-string (clj->js {"Content-type" "application/transit+json"}))
     out))
+
+#_(go (prn "from do-ajax: " (<! (do-ajax "/methods" :post {:user-info nil}))))

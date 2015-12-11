@@ -14,3 +14,11 @@ An app for tracking progress with the [5/3/1 strength program](https://www.t-nat
 
 ## To run:
 From the project directory, simply run `./run.sh`
+
+## To deploy:
+
+* Run `docker build -t projectfrank/531 .` from project directory
+* Run `docker push projectfrank/531`
+* On the server, kill and remove the docker container named 531
+	* `docker kill 531 && docker remove 531`
+* On the server, run `docker pull projectfrank/531` and then `~/start-app.sh`
