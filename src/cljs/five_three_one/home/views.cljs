@@ -14,7 +14,6 @@
 (defn page []
   (fn []
     [:div [:h2 (heading)]
-     [:div [:a {:href "#/about"} "go to about page"]]
      [counter/count [:home :counts :first]]
      [:h2 "OTHER COUNTER"]
      [counter/count [:home :counts :second]]

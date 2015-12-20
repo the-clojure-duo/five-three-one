@@ -19,8 +19,8 @@
 
 (defn app-routes []
   (secretary/set-config! :prefix "#")
-  (defroute "/" []
+  (defroute "/home" []
     (re-frame/dispatch [:set-active-page :home]))
-  (defroute "/about" []
-    (re-frame/dispatch [:set-active-page :about]))
+  (defroute "/" []
+    (re-frame/dispatch [:set-active-page :onboarding]))
   (hook-browser-navigation!))
