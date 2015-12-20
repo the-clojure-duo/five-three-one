@@ -21,6 +21,4 @@
   (secretary/set-config! :prefix "#")
   (defroute "/" []
     (re-frame/dispatch [:set-active-page :home]))
-  (defroute "/about" []
-    (re-frame/dispatch [:set-active-page :about]))
   (hook-browser-navigation!))
