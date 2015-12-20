@@ -1,4 +1,7 @@
 (ns five-three-one.home.db)
 
 (def initial-state
-  {:home {:count 0}})
+  {:home {:counts {:first 0
+                   :second 0
+                   :third 0}}
+   :counts {:first 0}})

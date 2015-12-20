@@ -3,18 +3,20 @@
             [re-frame.core :refer [subscribe
                                    dispatch]]
             five-three-one.home.handlers
-            five-three-one.home.subs))
+            five-three-one.home.subs
+            [clojure.string :as str]
+            [five-three-one.components.counter :as counter]))
 
 (defn heading
   []
   "this is a heading")
 
 (defn page []
-  (let [count (subscribe [:home-count])]
-    (fn []
-      [:div [:h2 (heading)]
-       [:div [:a {:href "#/about"} "go to about page"]]
-       [:button {:on-click #(dispatch [:home-count-inc])}
-        "Click here to increment the number!"]
-       [:div (str @count)]
-       [:a {:href "/signout"} "SIGN OUT"]])))
+  (fn []
+    [:div [:h2 (heading)]
+     [:div [:a {:href "#/about"} "go to about page"]]
+     [counter/count [:home :counts :first]]
+     [:h2 "OTHER COUNTER"]
+     [counter/count [:home :counts :second]]
+     [counter/count [:home :counts :third]]
+     [:a {:href "/signout"} "SIGN OUT"]]))
